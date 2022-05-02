@@ -14,6 +14,25 @@ const TRANSPORT = mailer.createTransport({
   },
 });
 
-const confirmationEmail = () => {};
+const confirmationEmail = async (token, person) => {
+  const Link =
+    process.env.ENV === "prod"
+      ? null
+      : `http://localhost:8081/authentication/activate-account/${token}`;
+  const mailOptions = {
+    from: "",
+    to: person.email,
+    subject: "Confirm your account info",
+    text: `Thank you ${person.name} for opening an account with Legacy Bank. Please click on the link below to verify your account. 
+      ${Link}`,
+  };
+  try {
+    await TRANSPORT.sendMail(mailOptions);
+    return 200;
+  } catch (error) {
+    console.log(error);
+    return 400;
+  }
+};
 
 module.exports = { confirmationEmail };
