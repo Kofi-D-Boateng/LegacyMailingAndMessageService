@@ -1,7 +1,7 @@
 "use strict";
 const USER = require("../../models/userModel");
 
-const getNotis = async (req, res) => {
+const getNotification = async (req, res) => {
   const email = req.params["user-email"];
   try {
     const foundUser = await USER.findOne({ email: email });
@@ -11,4 +11,8 @@ const getNotis = async (req, res) => {
   }
 };
 
-module.exports = { getNotis };
+const setNotification = async (req, res) => {
+  console.log(req.body);
+};
+
+module.exports = { getNotification, setNotification };
