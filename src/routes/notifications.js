@@ -7,8 +7,8 @@ const {
 
 const router = require("express").Router();
 
-router.get("/:user-email", getNotification);
+router.get("/", getNotification);
 
-router.post("set-notifications", setNotification);
+router.post("/set-notifications", setNotification);
 
 module.exports = router;
