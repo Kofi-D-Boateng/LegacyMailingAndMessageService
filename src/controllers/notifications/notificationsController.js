@@ -16,7 +16,6 @@ const setNotification = async (req, res) => {
   const transaction = await req.body;
   try {
     const user = await USER.findOne({ email: transaction.email });
-    console.log(user);
     if (!user) {
       const doc = {
         email: transaction.email,
@@ -44,8 +43,25 @@ const setNotification = async (req, res) => {
   } catch (error) {
     console.log(error);
     res.json(false);
-    return "error";
   }
 };
 
-module.exports = { getNotification, setNotification };
+const markNotification = async (req, res) => {
+  const { email, msg_id } = req.body;
+  try {
+    const user = await USER.findOne({ email: email });
+    user.notifications.map((n) => {
+      const ID = n._id.toString();
+      if (ID === msg_id) {
+        n.read = true;
+      }
+    });
+    await user.save();
+    res.status(200).json(user.notifications);
+  } catch (error) {
+    console.log(error);
+    res.status(400).json("");
+  }
+};
+
+module.exports = { getNotification, setNotification, markNotification };
