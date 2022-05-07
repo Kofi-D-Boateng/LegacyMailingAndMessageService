@@ -1,11 +1,17 @@
 "use strict";
 
 const {
-  getNotis,
+  getNotification,
+  setNotification,
+  markNotification,
 } = require("../controllers/notifications/notificationsController");
 
 const router = require("express").Router();
 
-router.get("/:user-email", getNotis);
+router.get("/", getNotification);
+
+router.post("/set-notifications", setNotification);
+
+router.post("/mark-notification", markNotification);
 
 module.exports = router;

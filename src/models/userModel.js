@@ -8,10 +8,15 @@ const userSchema = new mongoose.Schema({
     unique: true,
     default: null,
   },
-  notifications: {
-    type: [],
-    default: [],
-  },
+  notifications: [
+    {
+      sender: String,
+      receiver: String,
+      amount: Number,
+      date: String,
+      read: Boolean,
+    },
+  ],
 });
 
 module.exports = mongoose.models.User || mongoose.model("User", userSchema);
