@@ -1,3 +1,4 @@
+"use strict";
 const service = async (req, res) => {
   const DATA = {
     emailer: req.body.email,

@@ -1,6 +1,5 @@
 "use strict";
 const USER = require("../../models/userModel");
-const crypto = require("crypto");
 
 const getNotification = async (req, res) => {
   const email = await req.query.email;
@@ -16,6 +15,23 @@ const setNotification = async (req, res) => {
   const transaction = await req.body;
   try {
     const user = await USER.findOne({ email: transaction.email });
+    const receiver = await USER.findOne({ email: transaction.receiverEmail });
+
+    console.log(receiver);
+    if (transaction.userInDatabase && !receiver) {
+      const doc = {
+        email: transaction.receiverEmail,
+        notifications: {
+          sender: transaction.sender,
+          receiver: transaction.receiver,
+          amount: transaction.amount,
+          date: transaction.localDateTime,
+          read: false,
+        },
+      };
+      await USER.insertMany(doc);
+    }
+
     if (!user) {
       const doc = {
         email: transaction.email,
@@ -31,6 +47,18 @@ const setNotification = async (req, res) => {
       res.json(true);
       return;
     }
+
+    if (transaction.userInDatabase && receiver) {
+      receiver.notifications.push({
+        sender: transaction.sender,
+        receiver: transaction.receiver,
+        amount: transaction.amount,
+        date: transaction.localDateTime,
+        read: false,
+      });
+      await receiver.save();
+    }
+
     user.notifications.push({
       sender: transaction.sender,
       receiver: transaction.receiver,

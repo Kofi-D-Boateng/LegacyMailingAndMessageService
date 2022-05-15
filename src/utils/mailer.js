@@ -1,24 +1,19 @@
 "use strict";
 const mailer = require("nodemailer");
-const User = require("../models/userModel");
 const CS = require("../models/customerServiceModel");
-const USER = process.env.MAILER_USER ? process.env.MAILER_USER : undefined;
-const PW = process.env.MAILER_USER ? process.env.MAILER_PW : undefined;
+const config = require("../config/configurations");
 
 const TRANSPORT = mailer.createTransport({
-  service: "gmail",
-  host: "smtp.gmail.com",
+  service: config.MAILER_SERVICE,
+  host: config.MAILER_SMTP_HOST,
   auth: {
-    user: USER,
-    pass: PW,
+    user: config.MAILER_USER,
+    pass: config.MAILER_PASSWORD,
   },
 });
 
 const confirmationEmail = async (token, person) => {
-  const Link =
-    process.env.ENV === "prod"
-      ? null
-      : `http://localhost:8081/authentication/activate-account/${token}`;
+  const Link = `${config.ACCT_AUTH_LINK}/${token}`;
   const mailOptions = {
     from: "",
     to: person.email,
