@@ -1,6 +1,6 @@
 FROM node:16.6-alpine
 
-WORKDIR /usr/lb-notifcations
+WORKDIR /lb-notifcations
 
 COPY package*.json ./
 
