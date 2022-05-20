@@ -18,4 +18,4 @@ const config = {
   ACCT_AUTH_LINK: process.env.ACCT_AUTH_LINK,
 };
 
-module.exports = config;
+export default config;

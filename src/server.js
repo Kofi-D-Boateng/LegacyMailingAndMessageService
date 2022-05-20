@@ -1,17 +1,17 @@
 "use strict";
-require("dotenv").config();
-const express = require("express");
+import "dotenv/config";
+import express from "express";
+import morgan from "morgan";
 const app = express();
-const logger = require("morgan");
 
 // DATABASE INSTATIATION
-require("../src/config/databaseClient");
+import "../src/config/databaseClient.js";
 
 // ROUTE DEPENDENCIES
-const NOTIFICATIONS = require("../src/routes/notifications");
-const CUSTOMERSERVICE = require("../src/routes/customerService");
-const VERIFICATION = require("../src/routes/verification");
-const config = require("./config/configurations");
+import NOTIFICATIONS from "../src/routes/notifications.js";
+import CUSTOMERSERVICE from "../src/routes/customerService.js";
+import VERIFICATION from "../src/routes/verification.js";
+import config from "./config/configurations.js";
 
 // WHITELIST
 const WHITELIST = {
@@ -31,7 +31,7 @@ app.use((req, res, next) => {
   );
   next();
 });
-app.use(logger("dev"));
+app.use(morgan("dev"));
 app.use(express.json());
 
 // ROUTES

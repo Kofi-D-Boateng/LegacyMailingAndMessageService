@@ -1,6 +1,5 @@
 "use strict";
-const mongoose = require("mongoose");
-const config = require("./configurations");
-const db = mongoose.connect(config.MONGO_DB_URI);
-
-module.exports = db;
+import mongoose from "mongoose";
+const { connect } = mongoose;
+import config from "./configurations.js";
+export default connect(config.MONGO_DB_URI);

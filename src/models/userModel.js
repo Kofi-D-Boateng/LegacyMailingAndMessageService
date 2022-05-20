@@ -1,7 +1,8 @@
 "use strict";
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
+const { Schema, model, models } = mongoose;
 
-const userSchema = new mongoose.Schema({
+const userSchema = new Schema({
   email: {
     type: String,
     trim: true,
@@ -19,4 +20,4 @@ const userSchema = new mongoose.Schema({
   ],
 });
 
-module.exports = mongoose.models.User || mongoose.model("User", userSchema);
+export default models.User || model("User", userSchema);

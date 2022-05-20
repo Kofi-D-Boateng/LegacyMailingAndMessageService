@@ -1,9 +1,9 @@
 "use strict";
-const mailer = require("nodemailer");
-const CS = require("../models/customerServiceModel");
-const config = require("../config/configurations");
+import { createTransport } from "nodemailer";
+import CS from "../models/customerServiceModel.js";
+import config from "../config/configurations.js";
 
-const TRANSPORT = mailer.createTransport({
+const TRANSPORT = createTransport({
   service: config.MAILER_SERVICE,
   host: config.MAILER_SMTP_HOST,
   auth: {
@@ -30,4 +30,4 @@ const confirmationEmail = async (token, person) => {
   }
 };
 
-module.exports = { confirmationEmail };
+export { confirmationEmail };

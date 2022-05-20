@@ -7,4 +7,4 @@ const service = async (req, res) => {
   console.log(DATA);
 };
 
-module.exports = { service };
+export default service;

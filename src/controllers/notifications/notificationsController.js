@@ -1,5 +1,5 @@
 "use strict";
-const USER = require("../../models/userModel");
+import USER from "../../models/userModel.js";
 
 const getNotification = async (req, res) => {
   const email = await req.query.email;
@@ -92,4 +92,4 @@ const markNotification = async (req, res) => {
   }
 };
 
-module.exports = { getNotification, setNotification, markNotification };
+export { getNotification, setNotification, markNotification };
