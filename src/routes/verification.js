@@ -1,11 +1,8 @@
 "use strict";
-
-const {
-  sendVerificationEmail,
-} = require("../controllers/verification/verficationController");
-
-const router = require("express").Router();
+import express from "express";
+import sendVerificationEmail from "../controllers/verification/verficationController.js";
+const router = express.Router();
 
 router.post("/send-email", sendVerificationEmail);
 
-module.exports = router;
+export default router;

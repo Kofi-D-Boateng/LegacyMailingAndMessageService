@@ -1,12 +1,12 @@
 "use strict";
-
-const {
+import express from "express";
+import {
   getNotification,
-  setNotification,
   markNotification,
-} = require("../controllers/notifications/notificationsController");
+  setNotification,
+} from "../controllers/notifications/notificationsController.js";
 
-const router = require("express").Router();
+const router = express.Router();
 
 router.get("/", getNotification);
 
@@ -14,4 +14,4 @@ router.post("/set-notifications", setNotification);
 
 router.post("/mark-notification", markNotification);
 
-module.exports = router;
+export default router;

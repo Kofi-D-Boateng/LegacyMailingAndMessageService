@@ -1,7 +1,5 @@
 "use strict";
-require("dotenv").config();
-const mongoose = require("mongoose");
-const URI = process.env.DB_HOST ? process.env.DB_HOST : undefined;
-const db = mongoose.connect(URI);
-
-module.exports = db;
+import mongoose from "mongoose";
+const { connect } = mongoose;
+import config from "./configurations.js";
+export default connect(config.MONGO_DB_URI);

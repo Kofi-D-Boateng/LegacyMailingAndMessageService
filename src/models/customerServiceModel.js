@@ -1,7 +1,8 @@
 "use strict";
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
+const { Schema, model, models } = mongoose;
 
-const customerServiceSchema = new mongoose.Schema({
+const customerServiceSchema = new Schema({
   department: {
     type: String,
     trim: true,
@@ -13,6 +14,5 @@ const customerServiceSchema = new mongoose.Schema({
   },
 });
 
-module.exports =
-  mongoose.models.customerService ||
-  mongoose.model("customer_service", customerServiceSchema);
+export default models.customerService ||
+  model("customer_service", customerServiceSchema);

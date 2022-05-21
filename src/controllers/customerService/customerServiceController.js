@@ -1,3 +1,4 @@
+"use strict";
 const service = async (req, res) => {
   const DATA = {
     emailer: req.body.email,
@@ -6,4 +7,4 @@ const service = async (req, res) => {
   console.log(DATA);
 };
 
-module.exports = { service };
+export default service;

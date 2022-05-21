@@ -1,21 +1,21 @@
 "use strict";
-require("dotenv").config();
-const express = require("express");
+import "dotenv/config";
+import express from "express";
+import morgan from "morgan";
 const app = express();
-const logger = require("morgan");
-const PORT = process.env.ENVIRONMENT === "prod" ? undefined : 5500;
 
 // DATABASE INSTATIATION
-require("../src/config/databaseClient");
+import "../src/config/databaseClient.js";
 
 // ROUTE DEPENDENCIES
-const NOTIFICATIONS = require("../src/routes/notifications");
-const CUSTOMERSERVICE = require("../src/routes/customerService");
-const VERIFICATION = require("../src/routes/verification");
+import NOTIFICATIONS from "../src/routes/notifications.js";
+import CUSTOMERSERVICE from "../src/routes/customerService.js";
+import VERIFICATION from "../src/routes/verification.js";
+import config from "./config/configurations.js";
 
 // WHITELIST
 const WHITELIST = {
-  origins: "*" || [process.env.ORIGINS],
+  origins: config.CORS_ORIGINS,
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true,
   optionSuccessStatus: 200,
@@ -31,16 +31,16 @@ app.use((req, res, next) => {
   );
   next();
 });
-app.use(logger("dev"));
+app.use(morgan("dev"));
 app.use(express.json());
 
 // ROUTES
-app.use("/user/notifications", NOTIFICATIONS);
-app.use("/customer-service", CUSTOMERSERVICE);
-app.use("/verification", VERIFICATION);
+app.use(`/${config.VERSION}/user/notifications`, NOTIFICATIONS);
+app.use(`/${config.VERSION}/customer-service`, CUSTOMERSERVICE);
+app.use(`/${config.VERSION}/verification`, VERIFICATION);
 
-app.listen(process.env.MAILER_PORT || PORT, (err) => {
+app.listen(config.NOTI_PORT, (err) => {
   if (!err) {
-    console.log(`Mailer process started on port: ${PORT}`);
+    console.log(`Mailer process started on port: ${config.NOTI_PORT}`);
   }
 });

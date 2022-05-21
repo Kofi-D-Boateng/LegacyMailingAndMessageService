@@ -1,10 +1,11 @@
 "use strict";
 
-const { confirmationEmail } = require("../../utils/mailer");
+import { confirmationEmail } from "../../utils/mailer.js";
 
 const sendVerificationEmail = async (req, res) => {
   const { token, person } = req.body;
-  await confirmationEmail(token, person);
+  const RESULT = await confirmationEmail(token, person);
+  res.status(RESULT).json("");
 };
 
-module.exports = { sendVerificationEmail };
+export default sendVerificationEmail;

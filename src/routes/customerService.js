@@ -1,11 +1,9 @@
 "use strict";
+import express from "express";
+import service from "../controllers/customerService/customerServiceController.js";
 
-const {
-  service,
-} = require("../controllers/customerService/customerServiceController");
-
-const router = require("express").Router();
+const router = express.Router();
 
 router.post("/email", service);
 
-module.exports = router;
+export default router;
