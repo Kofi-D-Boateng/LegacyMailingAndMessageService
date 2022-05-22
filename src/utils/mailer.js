@@ -13,13 +13,12 @@ const TRANSPORT = createTransport({
 });
 
 const confirmationEmail = async (token, person) => {
-  const Link = `${config.ACCT_AUTH_LINK}/${token}`;
+  const Link = `${config.ACCT_AUTH_LINK}?token=${token}`;
   const mailOptions = {
-    from: "",
     to: person.email,
     subject: "Confirm your account info",
     text: `Thank you ${person.name} for opening an account with Legacy Bank. Please click on the link below to verify your account. 
-      ${Link}`,
+    ${Link}`,
   };
   try {
     await TRANSPORT.sendMail(mailOptions);

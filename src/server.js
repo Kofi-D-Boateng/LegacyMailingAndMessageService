@@ -8,9 +8,9 @@ const app = express();
 import "../src/config/databaseClient.js";
 
 // ROUTE DEPENDENCIES
-import NOTIFICATIONS from "../src/routes/notifications.js";
-import CUSTOMERSERVICE from "../src/routes/customerService.js";
-import VERIFICATION from "../src/routes/verification.js";
+import NOTIFICATIONS from "../src/routes/notifications/notifications.js";
+import CUSTOMERSERVICE from "../src/routes/customerService/customerService.js";
+import VERIFICATION from "../src/routes/verification/verification.js";
 import config from "./config/configurations.js";
 
 // WHITELIST
