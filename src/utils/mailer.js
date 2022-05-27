@@ -29,7 +29,7 @@ const confirmationEmail = async (token, person) => {
     await TRANSPORT.sendMail(mailOptions);
     return 200;
   } catch (error) {
-    console.log(error);
+    console.log(error.message);
     return 400;
   }
 };

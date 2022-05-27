@@ -7,7 +7,7 @@ const getNotification = async (req, res) => {
     const foundUser = await USER.findOne({ email: email });
     res.status(200).json(foundUser ? foundUser.notifications : undefined);
   } catch (error) {
-    console.log(error);
+    console.log(error.message);
   }
 };
 
@@ -17,7 +17,6 @@ const setNotification = async (req, res) => {
     const user = await USER.findOne({ email: transaction.email });
     const receiver = await USER.findOne({ email: transaction.receiverEmail });
 
-    console.log(receiver);
     if (transaction.userInDatabase && !receiver) {
       const doc = {
         email: transaction.receiverEmail,
@@ -44,7 +43,7 @@ const setNotification = async (req, res) => {
         },
       };
       await USER.insertMany(doc);
-      res.json(true);
+      res.status(200).json(true);
       return;
     }
 
@@ -67,10 +66,10 @@ const setNotification = async (req, res) => {
       read: false,
     });
     await user.save();
-    res.json(true);
+    res.status(200).json(true);
   } catch (error) {
-    console.log(error);
-    res.json(false);
+    console.log(error.message);
+    res.status(400).json(false);
   }
 };
 
@@ -87,8 +86,8 @@ const markNotification = async (req, res) => {
     await user.save();
     res.status(200).json(user.notifications);
   } catch (error) {
-    console.log(error);
-    res.status(400).json("");
+    console.log(error.message);
+    res.status(400).json();
   }
 };
 
