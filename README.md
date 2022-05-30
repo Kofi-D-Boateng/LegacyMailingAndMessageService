@@ -1,5 +1,8 @@
 # Legacy Mailer and Push Notifications
 
+# ANNOUNCEMENT
+> We intend to change this microservice from a NodeJs service to a Django Microservice in the foreseeable future. Migrations are under away as of now.
+
 ## Project
 A centralized node for legacy banking that will handle push notifications for cellular and web devices connected to our infrastructure. 
 
