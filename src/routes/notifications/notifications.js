@@ -10,8 +10,8 @@ const router = express.Router();
 
 router.get("/", getNotification);
 
-router.post("/set-notifications", setNotification);
+router.put("/set-notifications", setNotification);
 
-router.post("/mark-notification", markNotification);
+router.put("/mark-notification", markNotification);
 
 export default router;

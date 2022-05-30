@@ -4,6 +4,6 @@ import service from "../../controllers/customerService/customerServiceController
 
 const router = express.Router();
 
-router.post("/email", service);
+router.put("/email", service);
 
 export default router;
