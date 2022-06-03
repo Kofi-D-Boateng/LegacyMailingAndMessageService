@@ -1,6 +1,7 @@
 "use strict";
 import mongoose from "mongoose";
 const { Schema, model, models } = mongoose;
+const date = new Date();
 
 const customerServiceSchema = new Schema({
   department: {
@@ -8,10 +9,15 @@ const customerServiceSchema = new Schema({
     trim: true,
     unique: true,
   },
-  queue: {
-    type: [],
-    default: [],
-  },
+  queue: [
+    {
+      emailer: String,
+      sentAt: Date,
+      topic: String,
+      msg: String,
+      completed: Boolean,
+    },
+  ],
 });
 
 export default models.customerService ||
