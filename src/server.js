@@ -11,6 +11,7 @@ import "../src/config/databaseClient.js";
 import NOTIFICATIONS from "../src/routes/notifications/notifications.js";
 import CUSTOMERSERVICE from "../src/routes/customerService/customerService.js";
 import VERIFICATION from "../src/routes/verification/verification.js";
+import MAILLIST from "../src/routes/mailLetter/mailLetter.js";
 import config from "./config/configurations.js";
 
 // WHITELIST
@@ -24,7 +25,7 @@ const WHITELIST = {
 //MIDDLEWARE
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", `${WHITELIST.origins}`);
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+  res.header("Access-Control-Allow-Methods", `${WHITELIST.methods}`);
   res.header(
     "Access-Control-Allow-Headers",
     "Origin, Content-Type, Accept, authorization,x-forwarded-for, User-Agent"
@@ -38,6 +39,7 @@ app.use(express.json());
 app.use(`/${config.VERSION}/user/notifications`, NOTIFICATIONS);
 app.use(`/${config.VERSION}/customer-service`, CUSTOMERSERVICE);
 app.use(`/${config.VERSION}/verification`, VERIFICATION);
+app.use(`/${config.VERSION}/mail-list`, MAILLIST);
 
 app.listen(config.NOTI_PORT, (err) => {
   if (!err) {
